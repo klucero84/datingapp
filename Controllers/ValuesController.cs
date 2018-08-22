@@ -44,8 +44,6 @@ namespace DatingApp.API.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-            string s = "asdfa";
-            s = "neww";
         }
 
         // PUT api/values/5
