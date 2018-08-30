@@ -2,6 +2,9 @@ using System;
 
 namespace DatingApp.API.Dtos
 {
+    /// <summary>
+    /// dto for photo in user detail
+    /// </summary>
     public class PhotosForDetailDto
     {
         public int Id { get; set; }

@@ -23,16 +23,30 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DatingApp.API
 {
+    /// <summary>
+    /// Runs an application, sets configurations for application, defines resources, data contexts, services, etc.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// application entry point
+        /// </summary>
+        /// <param name="configuration">Configuration key/value settings</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// The current configuration key/values for this applicaiton
+        /// </summary>
+        /// <value>the current configuration</value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
@@ -57,7 +71,12 @@ namespace DatingApp.API
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">the applicaiton to host</param>
+        /// <param name="env">the environment in which the appliction is hosted (e.g. dev, prod, test, etc).</param>
+        /// <param name="seeder">custom data seeding class</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())

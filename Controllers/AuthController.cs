@@ -13,6 +13,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DatingApp.API.Controllers
 {
+    /// <summary>
+    /// Controller responsible for authorizing users
+    /// </summary>
     [AllowAnonymous]   
     [Route("api/[controller]")]
     [ApiController]
@@ -20,13 +23,23 @@ namespace DatingApp.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-
+        
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="repo">data repository to authenticate against.</param>
+        /// <param name="config">application configurations</param>
         public AuthController(IAuthRepository repo, IConfiguration config)
         {
             _config = config;
             _repo = repo;
         }
 
+        /// <summary>
+        /// Adds user to the data repository 
+        /// </summary>
+        /// <param name="dto">user info relevant to registering</param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto dto)
         {
@@ -44,6 +57,12 @@ namespace DatingApp.API.Controllers
 
             return StatusCode(201);
         }
+
+        /// <summary>
+        /// Authenticates a user and allows them access to the application
+        /// </summary>
+        /// <param name="dto">user info relevent to logging in</param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto dto)
         {

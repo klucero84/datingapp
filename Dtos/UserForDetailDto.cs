@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace DatingApp.API.Dtos
 {
+    /// <summary>
+    /// dto for user detail 
+    /// </summary>
     public class UserForDetailDto
     {
         public int Id {get; set;}

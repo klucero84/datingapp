@@ -4,16 +4,26 @@ using Newtonsoft.Json;
 
 namespace DatingApp.API.Data
 {
+    /// <summary>
+    /// Class for seeding data in the data context
+    /// </summary>
     public class Seed
     {
         private readonly DataContext _context;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="context">Datacontext to get seeded with data</param>
         public Seed(DataContext context)
         {
             _context = context;
             
         }
 
+        /// <summary>
+        /// Main seed process
+        /// </summary>
         public void SeedUsers(){
             var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
             var users = JsonConvert.DeserializeObject<List<User>>(userData);

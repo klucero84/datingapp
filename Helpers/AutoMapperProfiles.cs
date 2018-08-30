@@ -5,8 +5,14 @@ using DatingApp.API.Models;
 
 namespace DatingApp.API.Helpers
 {
+    /// <summary>
+    /// profiles for automapper utility
+    /// </summary>
     public class AutoMapperProfiles : Profile
     {
+        /// <summary>
+        /// profiles for mapping models to dtos
+        /// </summary>
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForListDto>().ForMember(dest => dest.PhotoUrl, opt => {

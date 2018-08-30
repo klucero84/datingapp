@@ -2,6 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DatingApp.API.Dtos
 {
+
+    /// <summary>
+    /// dto for registation process
+    /// </summary>
     public class UserForRegisterDto
     {
         [Required]

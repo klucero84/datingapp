@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
+    /// <summary>
+    /// Controller responsible for user models
+    /// </summary>
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -15,13 +18,22 @@ namespace DatingApp.API.Controllers
     {
         private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
-
+        
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="repo">data repository to get user info from</param>
+        /// <param name="mapper">automapper configurations</param>
         public UsersController(IDatingRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
         }
 
+        /// <summary>
+        /// Gets all Users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -30,6 +42,11 @@ namespace DatingApp.API.Controllers
             return Ok(usersToReturn);
         }
 
+        /// <summary>
+        /// Get a single user by their id.
+        /// </summary>
+        /// <param name="id">int unique identifier</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {

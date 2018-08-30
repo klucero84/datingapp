@@ -2,6 +2,9 @@ using System;
 
 namespace DatingApp.API.Models
 {
+    /// <summary>
+    /// images uploaded by the end user
+    /// </summary>
     public class Photo
     {
         public int Id { get; set; }
