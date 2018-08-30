@@ -12,6 +12,10 @@ namespace DatingApp.API.Migrations
     [Migration("20180821005931_AddedUserEntity2")]
     partial class AddedUserEntity2
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

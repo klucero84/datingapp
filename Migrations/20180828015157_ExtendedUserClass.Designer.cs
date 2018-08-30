@@ -8,10 +8,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatingApp.API.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DbContext(typeof(DataContext))]
     [Migration("20180828015157_ExtendedUserClass")]
     partial class ExtendedUserClass
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

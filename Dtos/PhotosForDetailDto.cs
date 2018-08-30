@@ -7,14 +7,34 @@ namespace DatingApp.API.Dtos
     /// </summary>
     public class PhotosForDetailDto
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public int Id { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public string Url { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public string Description { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public DateTime DateAdded { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public bool IsMain { get; set; }
     }
 }

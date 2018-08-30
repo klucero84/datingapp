@@ -3,8 +3,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DatingApp.API.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class AddedUserEntity : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -23,6 +30,10 @@ namespace DatingApp.API.Migrations
                 });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

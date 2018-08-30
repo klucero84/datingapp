@@ -3,8 +3,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DatingApp.API.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ExtendedUserClass : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
@@ -89,6 +96,10 @@ namespace DatingApp.API.Migrations
                 column: "UserId");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
