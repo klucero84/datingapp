@@ -1,23 +1,24 @@
 using System;
+using Microsoft.AspNetCore.Http;
 
-namespace DatingApp.API.Models
+namespace DatingApp.API.Dtos
 {
     /// <summary>
-    /// images uploaded by the end user
+    /// dto for creating a photo
     /// </summary>
-    public class Photo
+    public class PhotoForCreationDto
     {
         /// <summary>
         /// 
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        public string Url { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <value></value>
-        public string Url { get; set; }
+        public IFormFile File { get; set; }
 
         /// <summary>
         /// 
@@ -35,24 +36,14 @@ namespace DatingApp.API.Models
         /// 
         /// </summary>
         /// <value></value>
-        public bool IsMain { get; set; }
+        public string PublicId { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <value></value>
-        public string  PublicId { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <value></value>
-        public User User { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <value></value>
-        public int UserId { get; set; }
+        public PhotoForCreationDto()
+        {
+            DateAdded = DateTime.Now;
+        }
     }
 }

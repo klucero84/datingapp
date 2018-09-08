@@ -38,6 +38,19 @@ namespace DatingApp.API.Data
         {
             _context.Remove(entity);
         }
+
+        /// <summary>
+        /// Gets a photo asynchronously
+        /// </summary>
+        /// <param name="id">Unique identifer of the photo to get</param>
+        /// <returns>an asynchronous operation returning a photo model</returns>
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+
+            return photo;
+        }
+
         /// <summary>
         /// Returns a User for a given unique id.
         /// </summary>
