@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DatingApp.API.Helpers;
 using DatingApp.API.Models;
 
 namespace DatingApp.API.Data
@@ -31,7 +32,7 @@ namespace DatingApp.API.Data
         /// Gets a list of all users asynchronously
         /// </summary>
         /// <returns>an asychronous operation returning an enumerable collection of User models</returns>
-         Task<IEnumerable<User>> GetUsers();
+         Task<PagedList<User>> GetUsers(UserParams userParams);
 
         /// <summary>
         /// Gets a user asynchronously
