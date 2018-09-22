@@ -18,7 +18,7 @@ namespace DatingApp.API.Controllers
     /// Controller responsible for Photos
     /// </summary>
     [Authorize]
-    [Route("api/users{userId}/photos")]
+    [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
     {
@@ -67,7 +67,7 @@ namespace DatingApp.API.Controllers
         /// <param name="photoDto">the photo information</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoDto)
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photoDto)
         {
              if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -78,6 +78,7 @@ namespace DatingApp.API.Controllers
 
             var uploadResult = new ImageUploadResult();
 
+            //todo: add null check and message 
             if (file.Length > 0)
             {
                 using(var stream = file.OpenReadStream())

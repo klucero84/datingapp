@@ -15,7 +15,7 @@ namespace DatingApp.API.Dtos
         public string Url { get; set; }
 
         /// <summary>
-        /// 
+        /// Name of Property must match Form / Header Key
         /// </summary>
         /// <value></value>
         public IFormFile File { get; set; }
