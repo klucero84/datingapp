@@ -46,5 +46,7 @@ namespace DatingApp.API.Data
         /// <param name="id">Unique identifer of the photo to get</param>
         /// <returns>an asynchronous operation returning a photo model</returns>
          Task<Photo> GetPhoto(int id);
+
+        Task<Photo> GetMainPhotoForUser(int userId);
     }
 }
