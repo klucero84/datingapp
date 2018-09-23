@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,13 +30,16 @@ namespace DatingApp.API
     /// </summary>
     public class Startup
     {
+        private readonly IHostingEnvironment env;
+
         /// <summary>
         /// application entry point
         /// </summary>
         /// <param name="configuration">Configuration key/value settings</param>
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            env = environment;
         }
 
         /// <summary>
@@ -49,11 +54,21 @@ namespace DatingApp.API
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            if (env.IsDevelopment()) {
+                // local sqlite file
+                services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("connString")));
+            } else {
+                // MS SQL 
+                services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("connString"))
+                    .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
+            }
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+
+            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
@@ -79,7 +94,7 @@ namespace DatingApp.API
         /// <param name="app">the applicaiton to host</param>
         /// <param name="env">the environment in which the appliction is hosted (e.g. dev, prod, test, etc).</param>
         /// <param name="seeder">custom data seeding class</param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+        public void Configure(IApplicationBuilder app, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -105,7 +120,14 @@ namespace DatingApp.API
             // seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { Controller = "Fallback", action = "Index" }
+                );
+            });
         }
     }
 }
